@@ -1,15 +1,25 @@
-name: GitHub Actions Demo
+name: Alerta de Push
+
 on:
   push:
     branches:
-      - main
+      - main  # Substitua 'main' pelo nome da branch principal do seu repositório
 
 jobs:
-  explore-github-actions:
+  send-alert:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "🎉 O trabalho foi acionado automaticamente por um evento de ${{ github.event_name }}."
-      - run: echo "🐧 Este trabalho está sendo executado em um servidor ${{ runner.os }} hospedado pelo GitHub!"
-      - run: echo "🔎 O nome do seu branch é ${{ github.ref }} e seu repositório é YeddaMC/GH4W-lab4-mod4."
+    - name: Enviar Alerta de Push
+      env:
+        REPOSITORIO: ${{ github.repository }}
+        REF: ${{ github.ref }}
+        COMMIT_SHA: ${{ github.sha }}
+        MENSAGEM_COMMIT: ${{ github.event.head_commit.message }}
+      run: |
+        echo "Alerta de push acionado!"
+        echo "Repositório: $REPOSITORIO"
+        echo "Ref: $REF"
+        echo "SHA do Commit: $COMMIT_SHA"
+        echo "Mensagem do Commit: $MENSAGEM_COMMIT"
+
