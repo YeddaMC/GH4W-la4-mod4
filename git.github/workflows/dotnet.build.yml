@@ -3,7 +3,7 @@ name: Alerta de Push
 on:
   push:
     branches:
-      - main  # Substitua 'main' pelo nome da branch principal do seu repositório
+      - main 
 
 jobs:
   send-alert:
